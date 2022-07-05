@@ -147,17 +147,6 @@ def update_site(id: str):
             flash(str(exn), category="danger")
         return redirect(url_for("sites.list_sites"))
 
-    stack = auto.select_stack(
-        stack_name=stack_name,
-        project_name=current_app.config["PROJECT_NAME"],
-        # noop just to get the outputs
-        program=lambda: None,
-    )
-    outs = stack.outputs()
-    content_output = outs.get("website_content")
-    content = content_output.value if content_output else None
-
-
 @router.get("'/<id>/update")
 def update_site_get(id: str):
     stack_name = id
